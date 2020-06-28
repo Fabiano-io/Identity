@@ -1,0 +1,34 @@
+﻿@using Projeto.Modelo.Identity
+
+@using Projeto.Modelo.Identity.Extensions
+
+@{
+    ViewData["Title"] = "Controls";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's Controls.</p>
+
+<a class="btn btn-warning" supress-by-claim-name="Controls" supress-by-claim-value="Add" asp-action="Add" asp-route-id="0">Add</a>
+<a class="btn btn-danger" supress-by-claim-name="Controls" supress-by-claim-value="Edit" asp-action="Edi" asp-route-id="0">Edit</a>
+<a disable-by-claim-name="Controls" disable-by-claim-value="Delete" class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="0">Delete</a>
+
+
+<br />
+<br />
+
+@{
+    if (this.IfClaim("Controls", "Add"))
+    {
+        <p>Você só verá este texto se tiver permissao de adicionar!</p>
+    }
+}
+
+<div>
+    @Html.ActionLink("Secret", "Secret").IfClaimShow(Context, "Produtos", "Adicionar")
+</div>
+
+<div>
+    <br />
+    <a href="#" class="btn btn-danger @Html.Raw(this.IfClaimShow("Controls", "Edit"))">Disable</a>
+</div>
